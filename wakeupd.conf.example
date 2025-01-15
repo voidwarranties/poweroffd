@@ -1,0 +1,9 @@
+# 
+#
+
+host=localhost
+port=1883
+username=
+password=
+targethostsfile=targethosts.list
+topic_prefix=
