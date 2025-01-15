@@ -5,8 +5,9 @@
   ...
 }: let
   inherit (lib) types mkOption mkIf mkMerge;
+  inherit (pkgs) writeShellScript;
 
-  poweroffdScript = writeShellScriptBin "poweroffd.sh" "${builtins.readFile ./src/poweroffd.sh}";
+  poweroffdScript = writeShellScript "poweroffd.sh" "${builtins.readFile ./src/poweroffd.sh}";
 
   cfg = config.services.backtab;
 in {
