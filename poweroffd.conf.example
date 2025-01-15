@@ -1,8 +1,0 @@
-# 
-#
-
-host=localhost
-port=1883
-username=
-password=
-topic_prefix=
