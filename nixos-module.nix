@@ -9,10 +9,10 @@
 
   poweroffdScript = writeShellScript "poweroffd.sh" "${builtins.readFile ./src/poweroffd.sh}";
 
-  cfg = config.services.backtab;
+  cfg = config.services.poweroffd;
 in {
   options = {
-    services.backtab = {
+    services.poweroffd = {
       enable = lib.mkEnableOption "poweroffd";
 
       mqttHost = mkOption {
@@ -52,7 +52,7 @@ in {
         group = "poweroffd";
       };
 
-      systemd.services.backtab = {
+      systemd.services.poweroffd = {
         description = "Poweroffd Space Control";
         wantedBy = ["multi-user.target"];
         after = [
