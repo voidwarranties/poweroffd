@@ -45,6 +45,21 @@
   in {
     formatter = forAllSystems (pkgs: pkgs.alejandra);
 
+    packages = forAllSystems (pkgs: {
+      poweroffd-demo =
+        (inputs.nixpkgs.lib.nixosSystem {
+          system = pkgs.system;
+          modules = [
+            self.nixosModules.poweroffd
+            (import ./machines/poweroffd-demo {inherit pkgs;})
+          ];
+        })
+        .config
+        .system
+        .build
+        .vm;
+    });
+
     nixosModules.poweroffd = import ./nixos-module.nix;
   };
 }
