@@ -69,12 +69,35 @@ in {
           MQTT_PASSWORD = cfg.mqttPassword;
           MQTT_TOPIC = cfg.mqttTopic;
         };
-        path = [
-          pkgs.mosquitto
-          pkgs.sudo
-          pkgs.xorg.xhost
-          pkgs.xorg.xset
-          pkgs.zenity
+        path = with pkgs; [
+          mosquitto
+          sudo
+          xorg.xhost
+          xorg.xset
+          # Zenity with gtk3 for extra speed?
+          (zenity.overrideAttrs (oldAttrs: rec {
+            version = "3.44.0";
+            src = fetchurl {
+              url = "mirror://gnome/sources/zenity/${lib.versions.majorMinor version}/${oldAttrs.pname}-${version}.tar.xz";
+              sha256 = "wVWCMB7ZC51CzlIdvM+ZqYnyLxIEG91SecZjbamev2U=";
+            };
+            nativeBuildInputs = [
+              meson
+              ninja
+              pkg-config
+              gettext
+              itstool
+              libxml2
+              wrapGAppsHook
+            ];
+            buildInputs = [
+              gtk3
+              xorg.libX11
+            ];
+            patches = [
+              ./zenity-fix-icon-install.patch
+            ];
+          }))
           SCpowerOffPopupScript
           SCpowerOffScript
         ];
