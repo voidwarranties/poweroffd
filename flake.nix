@@ -48,7 +48,7 @@
     packages = forAllSystems (pkgs: {
       poweroffd-demo =
         (inputs.nixpkgs.lib.nixosSystem {
-          system = pkgs.system;
+          system = pkgs.stdenv.hostPlatform.system;
           modules = [
             self.nixosModules.poweroffd
             (import ./machines/poweroffd-demo {inherit pkgs;})

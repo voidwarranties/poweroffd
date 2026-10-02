@@ -88,7 +88,7 @@ in {
               gettext
               itstool
               libxml2
-              wrapGAppsHook
+              wrapGAppsHook3
             ];
             buildInputs = [
               gtk3
