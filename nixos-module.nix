@@ -72,8 +72,8 @@ in {
         path = with pkgs; [
           mosquitto
           sudo
-          xorg.xhost
-          xorg.xset
+          xhost
+          xset
           # Zenity with gtk3 for extra speed?
           (zenity.overrideAttrs (oldAttrs: rec {
             version = "3.44.0";
@@ -92,7 +92,7 @@ in {
             ];
             buildInputs = [
               gtk3
-              xorg.libX11
+              libx11
             ];
             patches = [
               ./zenity-fix-icon-install.patch
